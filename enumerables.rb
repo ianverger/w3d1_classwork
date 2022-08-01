@@ -83,9 +83,14 @@ class Array
     end
 
     def my_flatten
-        return [self] if !self.is_a?(Array) 
         arr = []
-        self.each { |ele| arr += my_flatten(ele) }
+        self.each do |ele| 
+            if ele.is_a?(Array)
+                arr += ele.my_flatten 
+            else
+                arr << ele
+            end
+        end
         arr
     end
 
@@ -98,5 +103,7 @@ class Array
 end
 
 print [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten # => [1, 2, 3, 4, 5, 6, 7, 8]
+
+
 
 
